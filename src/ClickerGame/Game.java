@@ -51,46 +51,46 @@ public class Game extends savedObjects
 
     //getter
     public String getName() {
-        return instance.name;
+        return name;
     }
     
     public double getcredit() {
-        return instance.credit;
+        return credit;
     }
     
     public double getEarnings() {
-        return instance.earnings;
+        return earnings;
     }
 
     public int getRenown() { // return renown level
-        return Level.toInt(instance.renown);
+        return Level.toInt(renown);
     }
 
     public Level getRenownName() { // return renown name
-        return instance.renown;
+        return renown;
     }
 
     public double getEarningMultiplier() {
-        return instance.earningMultiplier;
+        return earningMultiplier;
     }
 
 
     //to string
     @Override
     public String toString() {
-        return  "" + this.name + "\n"
-                + this.credit + "\n"
-                + this.earnings + "\n"
-                + this.earningMultiplier + "\n"
-                + Level.toInt(this.renown);
+        return  "" + name + "\n"
+                + credit + "\n"
+                + earnings + "\n"
+                + earningMultiplier + "\n"
+                + Level.toInt(renown);
     }
 
     //from string
     public void fromString(List<String> datas) {
-        instance.setName(datas.get(0));
-        instance.setcredit(Double.parseDouble(datas.get(1)));
-        instance.setEarnings(Double.parseDouble(datas.get(2)));
-        instance.setEarningMultiplier(Double.parseDouble(datas.get(3)));
-        instance.setRenown(Integer.parseInt(datas.get(4)));
+        setName(datas.get(0));
+        setcredit(Double.parseDouble(datas.get(1)));
+        setEarnings(Double.parseDouble(datas.get(2)));
+        setEarningMultiplier(Double.parseDouble(datas.get(3)));
+        setRenown(Integer.parseInt(datas.get(4)));
     }
 }

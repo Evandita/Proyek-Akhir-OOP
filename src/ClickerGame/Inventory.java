@@ -1,7 +1,10 @@
 package ClickerGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inventory{
-    public List<Item> items = ArrayList<>();
+    public List<Item> items = new ArrayList<>();
     public int itemCount;
     public int capacity;
 
@@ -18,7 +21,7 @@ public class Inventory{
     //Menghapus item dari inventory
     public boolean removeItem(Item item){
         for(Item temp : items){
-            if(item = temp){
+            if(item == temp){
                 items.remove(item);
                 return true;
             }

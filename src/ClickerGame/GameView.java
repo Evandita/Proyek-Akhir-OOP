@@ -7,14 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameView extends JFrame {
-    
-    private int level = 0;
-    private int totalPoints = 0;
-    private int pointsPerClick = 1;
+    private Game game = Game.getInstance();
+    private int level = game.getRenown();
+    private double totalPoints = game.getcredit();
+    private double pointsPerClick = game.getEarnings();
 
     public GameView() {
         // Set up the JFrame
-        setTitle("Clicker Game");
+        setTitle("\nClicker Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Use GridLayout to arrange components in equal-sized cells
@@ -63,6 +63,13 @@ public class GameView extends JFrame {
                 // Add the logic to save the mission data
                 // For example, you can save it to a file or a database
                 // Implement your save logic here
+                // update data
+                game.setRenown(level);
+                game.setcredit(totalPoints);
+                game.setEarnings(pointsPerClick);
+
+                // save data
+                GameController.save("src\\data\\game.txt", game);
                 System.out.println("Mission data saved!");
             }
         });
@@ -97,11 +104,18 @@ public class GameView extends JFrame {
         // Border for the clicker container
         Border clickerBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
         clickerContainer.setBorder(clickerBorder);
+
+
+        // Player Name
+        JLabel nameLabel = new JLabel(game.getName());
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameLabel.setBorder(BorderFactory.createEmptyBorder(60, 0, 10, 0)); // Add extra space from the top
+        nameLabel.setFont(nameLabel.getFont().deriveFont(Font.BOLD, 30)); // Bold and bigger font
     
         // Total points label with extra space from the top, bold, and bigger font
         JLabel totalPointsLabel = new JLabel("Total Points: " + totalPoints);
         totalPointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        totalPointsLabel.setBorder(BorderFactory.createEmptyBorder(80, 0, 10, 0)); // Add extra space from the top
+        //totalPointsLabel.setBorder(BorderFactory.createEmptyBorder(80, 0, 10, 0)); // Add extra space from the top
         totalPointsLabel.setFont(totalPointsLabel.getFont().deriveFont(Font.BOLD, 30)); // Bold and bigger font
     
         // Clicker button
@@ -118,7 +132,8 @@ public class GameView extends JFrame {
         // Points per click label
         JLabel pointsPerClickLabel = new JLabel("Points per Click: " + pointsPerClick);
         pointsPerClickLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    
+
+        clickerContainer.add(nameLabel);
         clickerContainer.add(totalPointsLabel);
         clickerContainer.add(Box.createVerticalGlue()); // Adds space between total points and clicker button
         clickerContainer.add(clickerButton);
@@ -174,10 +189,10 @@ public class GameView extends JFrame {
 
     
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             GameView game = new GameView();
             game.setVisible(true);
         });
-    }
+    }*/
 }

@@ -16,7 +16,6 @@ public class FileHandling {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             writer.write(obj.toString());
-            System.out.println("success");
         } catch (IOException e) {
             e.printStackTrace();
         }

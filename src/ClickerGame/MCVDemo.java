@@ -1,33 +1,21 @@
 package ClickerGame;
 
-import java.util.List;
+import javax.swing.SwingUtilities;
 
 public class MCVDemo {
-    /*public static void main(String[] args) {
-        Character model = savedCharacter(); //access saved character
-        CharacterView view = new CharacterView(); //create new view
-        CharacterController controller = new CharacterController(model, view);
-        controller.updateView();
-        
-        controller.setCharacterGold(50000);
-        controller.updateView();
-    }
-    
-    private static Character savedCharacter() {
-        Character character = Character.getInstance();
-        character.setName("Budi");
-        character.setGold(10000);
-        character.setDamage(3.33f);
-        return character;
-    }*/
 
     public static void main(String[] args) {
-        String filepath = "src\\data\\test.txt";
+        String filepath = "src\\data\\game.txt";
         Game game = Game.getInstance();
-        game.setEarnings(1);
-        GameController.save(filepath, game);
-        game.setEarnings(5);
+        
+        // load game
         GameController.load(filepath, game);
-        System.out.println(game.getEarnings());
+        System.out.println(game.toString());
+
+        // play game
+        SwingUtilities.invokeLater(() -> {
+            GameView gameView = new GameView();
+            gameView.setVisible(true);
+        });
     }
 }
