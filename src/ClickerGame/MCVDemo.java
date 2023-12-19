@@ -24,10 +24,10 @@ public class MCVDemo {
     public static void main(String[] args) {
         String filepath = "src\\data\\test.txt";
         Game game = Game.getInstance();
-        game.setEarnings(1);
+        game.setPointsPerClick(1);
         GameController.save(filepath, game);
-        game.setEarnings(5);
+        game.setPointsPerClick(5);
         GameController.load(filepath, game);
-        System.out.println(game.getEarnings());
+        System.out.println(game.getPointsPerClick());
     }
 }

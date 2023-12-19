@@ -2,48 +2,32 @@ package ClickerGame;
 
 //Type Item
 public class Item{
-    public enum Rarity {
-        COMMON(5),
-        UNCOMMON(20),
-        RARE(50),
-        EPIC(100),
-        LEGENDARY(2000);
-
-        private int rate;
-
-        private Rarity(int rate) {
-            this.rate = rate;
-        }
-
-        public int getRate() {
-            return rate;
-        }
-    }
-    public String name;
-    public int level;
-    public Rarity rarity;
-    public double earningIncrease;
+    
+    private String name;
+    private int level;
+    private int price;
+    private int pointsIncrease;
 
     //Constructor
-    public Item(String name, Rarity rarity, double earningIncrease){
+    public Item(String name, int price, int pointsIncrease){
         this.name = name;
         this.level = 1;
-        this.rarity = rarity;
-        this.earningIncrease = earningIncrease;
+        this.price = price;
+        this.pointsIncrease = pointsIncrease;
     }
 
     //Setter
-    public void setName(){
+    public void setName(String name){
         this.name = name;
     }
     public void setLevel(int level){
         this.level = level;
     }
-    public void setRarity(Rarity rarity){
-        this.rarity = rarity;
+    public void setPrice(int price){
+        this.price = price;
     }
-    public void setEarningIncrease(double earningIncrease){
-        this.earningIncrease = earningIncrease;
+    public void setPointsIncrease(int pointsIncrease){
+        this.pointsIncrease = pointsIncrease;
     }
     //Getter
     public String getName(){
@@ -52,33 +36,11 @@ public class Item{
     public int getLevel(){
         return this.level;
     }
-    public Rarity getRarity(){
-        return this.rarity;
+    public int getPrice(){
+        return this.price;
     }
-    public double getEarningIncrease(){
-        return this.earningIncrease;
+    public int getPointsIncrease(){
+        return this.pointsIncrease;
     }
-
-    //Method
-    private void upgrade(){
-        this.level ++;
-        this.earningIncrease += rarity.getRate();
-        }//belum tambah rumus
-
-     public static void main(String[] args) {
-        Item commonItem = new Item("Social Media Influence Bot", Rarity.COMMON, 1000);
-        Item rareItem = new Item("Mindfulness Meditation App", Rarity.LEGENDARY, 5000);
-
-        
-
-        System.out.println("Common Item Increased Value: " + commonItem.earningIncrease);
-        System.out.println("Rare Item Increased Value: " + rareItem.earningIncrease);
-
-        commonItem.upgrade();
-        rareItem.upgrade();
-
-        
-        System.out.println("Common Item Increased Value: " + commonItem.earningIncrease);
-        System.out.println("Rare Item Increased Value: " + rareItem.earningIncrease);
-    }
+    
 }

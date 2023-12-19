@@ -3,21 +3,30 @@ package ClickerGame;
 import java.util.List;
 
 public class Game extends savedObjects
-{
-    private String name;    // player name
-    private double credit;  // total social credit
-    private double earnings;    // credit earnings per click
-    private double earningMultiplier;
+{   
+
+    //Game Data
+
+    private int points;  
+    private int pointsPerClick;
+    private int pointsPerClickMultiplier;
+    private int cummulativePoints;
+    private int totalClicks;
+    private int totalItems;
     private Level renown;   // player social standings (level)
+    public List<Item> shopItems;
     
     private static Game instance; //singleton
     
     private Game() { //private constructor
-        setName("Bezos");
-        setcredit(0);
-        setEarnings(1);
-        setEarningMultiplier(1);
+        setPoints(0);
+        setPointsPerClick(1);
+        setPointsPerClickMultiplier(1);
+        setCummulativePoints(0);
+        setTotalClicks(0);
+        setTotalItems(0);
         setRenown(0);
+        this.shopItems = new Shop().items;
     }
     
     public static synchronized Game getInstance() { //get instance
@@ -28,38 +37,44 @@ public class Game extends savedObjects
     }
     
     //setter
-    public void setName(String name) {
-        this.name = name;
+    
+    public void setPoints(int points) {
+        this.points = points;
     }
     
-    public void setcredit(double credit) {
-        this.credit = credit;
-    }
-    
-    public void setEarnings(double earnings) {
-        this.earnings = earnings;
+    public void setPointsPerClick(int pointsPerClick) {
+        this.pointsPerClick = pointsPerClick;
     }
 
     public void setRenown(int level) {
         this.renown = Level.fromInt(level);
     }
 
-    public void setEarningMultiplier(double earningMultiplier) {
-        this.earningMultiplier = earningMultiplier;
+    public void setPointsPerClickMultiplier(int pointsPerClickMultiplier) {
+        this.pointsPerClickMultiplier = pointsPerClickMultiplier;
+    }
+
+    public void setTotalClicks(int totalClicks) {
+        this.totalClicks = totalClicks;
+    }
+
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
+    }
+
+    public void setCummulativePoints(int cummulativePoints) {
+        this.cummulativePoints = cummulativePoints;
     }
     
 
     //getter
-    public String getName() {
-        return instance.name;
+    
+    public int getPoints() {
+        return instance.points;
     }
     
-    public double getcredit() {
-        return instance.credit;
-    }
-    
-    public double getEarnings() {
-        return instance.earnings;
+    public int getPointsPerClick() {
+        return instance.pointsPerClick;
     }
 
     public int getRenown() { // return renown level
@@ -70,27 +85,43 @@ public class Game extends savedObjects
         return instance.renown;
     }
 
-    public double getEarningMultiplier() {
-        return instance.earningMultiplier;
+    public int getPointsPerClickMultiplier() {
+        return instance.pointsPerClickMultiplier;
+    }
+
+    public int getTotalClicks() {
+        return instance.totalClicks;
+    }
+
+    public int getTotalItems() {
+        return instance.totalItems;
+    }
+
+    public int getCummulativePoints() {
+        return cummulativePoints;
     }
 
 
     //to string
     @Override
     public String toString() {
-        return  "" + this.name + "\n"
-                + this.credit + "\n"
-                + this.earnings + "\n"
-                + this.earningMultiplier + "\n"
+        return  "" + this.points + "\n"
+                + this.pointsPerClick + "\n"
+                + this.pointsPerClickMultiplier + "\n"
+                + this.cummulativePoints + "\n"
+                + this.totalClicks + "\n"
+                + this.totalItems + "\n"
                 + Level.toInt(this.renown);
     }
 
     //from string
     public void fromString(List<String> datas) {
-        instance.setName(datas.get(0));
-        instance.setcredit(Double.parseDouble(datas.get(1)));
-        instance.setEarnings(Double.parseDouble(datas.get(2)));
-        instance.setEarningMultiplier(Double.parseDouble(datas.get(3)));
-        instance.setRenown(Integer.parseInt(datas.get(4)));
+        instance.setPoints(Integer.parseInt(datas.get(0)));
+        instance.setPointsPerClick(Integer.parseInt(datas.get(1)));
+        instance.setPointsPerClickMultiplier(Integer.parseInt(datas.get(2)));
+        instance.setCummulativePoints(Integer.parseInt(datas.get(3)));
+        instance.setTotalClicks(Integer.parseInt(datas.get(4)));
+        instance.setTotalItems(Integer.parseInt(datas.get(5)));
+        instance.setRenown(Integer.parseInt(datas.get(6)));
     }
 }
