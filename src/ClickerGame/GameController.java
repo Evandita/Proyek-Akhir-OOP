@@ -1,5 +1,7 @@
 package ClickerGame;
 
+import java.util.List;
+
 public class GameController {
     Game game = Game.getInstance();
 
@@ -13,5 +15,16 @@ public class GameController {
     public double click() {
         game.setcredit(game.getcredit() + game.getEarnings());
         return game.getEarnings();
+    }
+
+    //save
+    public static void save(String filepath, savedObjects obj) {
+        FileHandling.writeToFile(filepath, obj);
+    }
+
+    //load
+    public static void load(String filepath, savedObjects obj) {
+        List<String> datas = FileHandling.readFromFile(filepath);
+        obj.fromString(datas);
     }
 }

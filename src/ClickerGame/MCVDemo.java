@@ -1,5 +1,7 @@
 package ClickerGame;
 
+import java.util.List;
+
 public class MCVDemo {
     /*public static void main(String[] args) {
         Character model = savedCharacter(); //access saved character
@@ -18,4 +20,14 @@ public class MCVDemo {
         character.setDamage(3.33f);
         return character;
     }*/
+
+    public static void main(String[] args) {
+        String filepath = "src\\data\\test.txt";
+        Game game = Game.getInstance();
+        game.setEarnings(1);
+        GameController.save(filepath, game);
+        game.setEarnings(5);
+        GameController.load(filepath, game);
+        System.out.println(game.getEarnings());
+    }
 }

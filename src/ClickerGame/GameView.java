@@ -7,7 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameView extends JFrame {
-
+    
+    private int level = 0;
     private int totalPoints = 0;
     private int pointsPerClick = 1;
 
@@ -34,38 +35,75 @@ public class GameView extends JFrame {
 
     private JPanel createMissionContainer() {
         JPanel missionContainer = new JPanel();
-        missionContainer.setLayout(new BoxLayout(missionContainer, BoxLayout.Y_AXIS));
-        missionContainer.setBackground(new Color(255, 230, 230)); // Light pink background
-
+        missionContainer.setLayout(new BorderLayout());
+    
+        // Quest text with a light red background
+        JLabel questLabel = new JLabel("Hint: Click the button to earn points!\nComplete quests to progress in the game.");
+        questLabel.setBorder(BorderFactory.createEmptyBorder(40, 20, 10, 0)); // Add extra space from the top
+        questLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    
         // Border for the mission container
         Border missionBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
         missionContainer.setBorder(missionBorder);
-
-        // Quest text
-        JTextArea questText = new JTextArea("Mission: Click the button to earn points!\nComplete quests to progress in the game.");
-        questText.setEditable(false);
-        questText.setLineWrap(true);
-        questText.setWrapStyleWord(true);
-        questText.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        missionContainer.add(questText);
-
+        missionContainer.setBackground(new Color(255, 200, 200)); // Light red background
+    
+        // Add the quest text to the mission container at the top
+        missionContainer.add(questLabel, BorderLayout.NORTH);
+    
+        // Add a panel for buttons at the bottom
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setBackground(new Color(255, 200, 200)); // Light red background
+    
+        // Add a Save button with the same background color as the container
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add the logic to save the mission data
+                // For example, you can save it to a file or a database
+                // Implement your save logic here
+                System.out.println("Mission data saved!");
+            }
+        });
+        buttonPanel.add(saveButton);
+    
+        // Add a New Game button
+        JButton newGameButton = new JButton("New Game");
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add the logic to start a new game
+                // Implement your new game logic here
+                System.out.println("Starting a new game!");
+            }
+        });
+        buttonPanel.add(newGameButton);
+    
+        // Add the button panel to the mission container at the bottom
+        missionContainer.add(buttonPanel, BorderLayout.SOUTH);
+    
         return missionContainer;
     }
+    
+    
+    
 
     private JPanel createClickerContainer() {
         JPanel clickerContainer = new JPanel();
         clickerContainer.setLayout(new BoxLayout(clickerContainer, BoxLayout.Y_AXIS));
         clickerContainer.setBackground(new Color(230, 255, 230)); // Light green background
-
+    
         // Border for the clicker container
         Border clickerBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
         clickerContainer.setBorder(clickerBorder);
-
-        // Total points label
+    
+        // Total points label with extra space from the top, bold, and bigger font
         JLabel totalPointsLabel = new JLabel("Total Points: " + totalPoints);
         totalPointsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        totalPointsLabel.setBorder(BorderFactory.createEmptyBorder(80, 0, 10, 0)); // Add extra space from the top
+        totalPointsLabel.setFont(totalPointsLabel.getFont().deriveFont(Font.BOLD, 30)); // Bold and bigger font
+    
         // Clicker button
         JButton clickerButton = new JButton("Click Me!");
         clickerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -76,16 +114,16 @@ public class GameView extends JFrame {
                 updatePointsDisplay();
             }
         });
-
+    
         // Points per click label
         JLabel pointsPerClickLabel = new JLabel("Points per Click: " + pointsPerClick);
         pointsPerClickLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+    
         clickerContainer.add(totalPointsLabel);
         clickerContainer.add(Box.createVerticalGlue()); // Adds space between total points and clicker button
         clickerContainer.add(clickerButton);
         clickerContainer.add(pointsPerClickLabel);
-
+    
         return clickerContainer;
     }
 
@@ -133,6 +171,8 @@ public class GameView extends JFrame {
     private void updatePointsPerClickDisplay() {
         ((JLabel) ((JPanel) getContentPane().getComponent(1)).getComponent(3)).setText("Points per Click: " + pointsPerClick);
     }
+
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

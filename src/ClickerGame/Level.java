@@ -32,10 +32,18 @@ public enum Level { //ENUMERATION untuk level
     // cast enum to int
     public static int toInt(Level renown) {
         switch (renown) {
-            case ENUM0 :
+            case BEGGAR :
                 return 0;
-            case ENUM1 :
+            case COMMONER :
                 return 1;
+            case MERCHANT:
+                return 2;
+            case NOBLE:
+                return 3;
+            case KING:
+                return 4;
+            case EMPEROR:
+                return 5;
             default:
                 return -1;
         }
