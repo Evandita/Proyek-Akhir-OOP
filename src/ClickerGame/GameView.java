@@ -186,6 +186,7 @@ public class GameView extends JFrame {
     private void updatePointsPerClickDisplay() {
         ((JLabel) ((JPanel) getContentPane().getComponent(1)).getComponent(3)).setText("Points per Click: " + pointsPerClick);
     }
+<<<<<<< Updated upstream
 
     
 
@@ -195,4 +196,6 @@ public class GameView extends JFrame {
             game.setVisible(true);
         });
     }*/
+=======
+>>>>>>> Stashed changes
 }
